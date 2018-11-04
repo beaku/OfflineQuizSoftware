@@ -1,0 +1,12 @@
+.idea/workspace.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/vcs.xml
+miniproject.iml
+stash/*
+out/*
+offlineQuizSoftware.uml
+.idea/uiDesigner.xml
+stash/src/offlinetestingplatform/Good.java
+stash/src/offlinetestingplatform/Question.java
+stash/src/offlinetestingplatform/complex.java

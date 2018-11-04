@@ -20,14 +20,98 @@ import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author aayushjoglekar
- */
 public class QuizInterface extends javax.swing.JFrame {
 
-    private ArrayList<Question> questionList;
-    
+    private Vector<Question> questionList;
+
+    public void displaySelectedQuestion(int selectedQuestionIndex){
+
+        buttonGroup1.clearSelection();
+
+        Question requiredQuestion = questionList.get(selectedQuestionIndex-1);
+
+        questionDisplay.setText(requiredQuestion.getContent());
+
+        Dictionary optionList = requiredQuestion.getOptions();
+
+        ArrayList<String> options = new ArrayList<>();
+
+        for(Enumeration i = optionList.elements(); i.hasMoreElements();){
+            options.add((String) i.nextElement());
+
+
+        }
+
+        Collections.reverse(options);
+
+        option1.setText(options.get(0));
+        option2.setText(options.get(1));
+        option3.setText(options.get(2));
+        option4.setText(options.get(3));
+
+        submit.setEnabled(!requiredQuestion.isAttempted());
+
+    }
+
+    public void fillQuestionsFromCSV(){
+
+        //UPDATE FILE PATH TO RUN PROJECT
+        String questionFilePath = "/home/aayushjoglekar/NetBeansProjects/OfflineTestingPlatform/src/data/questionStore.csv";
+
+        File questionFile = new File(questionFilePath);
+
+        try {
+
+
+            BufferedReader questionReader = new BufferedReader(new FileReader(questionFile));
+
+            Object[] questionImportList = questionReader.lines().toArray();
+
+            questionReader.close();
+
+            for(Object question: questionImportList){
+
+                String questionString = question.toString().trim();
+                String[] questionArray = questionString.split(",");
+
+                ArrayList<String> options = new ArrayList<>();
+
+                options.add(questionArray[1]);
+                options.add(questionArray[2]);
+                options.add(questionArray[3]);
+                options.add(questionArray[4]);
+
+                questionList.add(new Question(questionArray[0], options, Integer.parseInt(questionArray[5].trim())));
+
+            }
+
+
+
+
+        } catch (FileNotFoundException ex) {
+
+            Logger.getLogger(QuizInterface.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (IOException ex) {
+            Logger.getLogger(QuizInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+
+    }
+
+    public void fillComboBox(){
+
+        String[] modelInput = new String[questionList.size()];
+
+        for(int i=0; i< questionList.size(); i++){
+            modelInput[i] = Integer.toString(i+1);
+        }
+
+        questionPicker.setModel(new javax.swing.DefaultComboBoxModel<>(modelInput));
+
+    }
+
     /**
      * Creates new form QuizInterface
      */
@@ -206,9 +290,6 @@ public class QuizInterface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -238,97 +319,7 @@ public class QuizInterface extends javax.swing.JFrame {
             new QuizInterface().setVisible(true);
         });
     }
-    
-    public void displaySelectedQuestion(int selectedOption){
-        
-        buttonGroup1.clearSelection();
-        
-        Question requiredQuestion = questionList.get(selectedOption-1);
-        
-        questionDisplay.setText(requiredQuestion.getContent());
-        
-        Dictionary optionList = requiredQuestion.getOptions();
-        
-        ArrayList<String> options = new ArrayList<>();
-        
-        for(Enumeration i = optionList.elements(); i.hasMoreElements();){
-            options.add((String) i.nextElement());
-            
-            
-        }
-        
-        Collections.reverse(options);
-        
-        option1.setText(options.get(0));
-        option2.setText(options.get(1));
-        option3.setText(options.get(2));
-        option4.setText(options.get(3));
-        
-        submit.setEnabled(!requiredQuestion.isAttempted());
-                
-    }
-    
-    public void fillQuestionsFromCSV(){
-        
-        //UPDATE FILE PATH TO RUN PROJECT
-        String questionFilePath = "/home/aayushjoglekar/NetBeansProjects/OfflineTestingPlatform/src/data/questionStore.csv";
-        
-        File questionFile = new File(questionFilePath);
-        
-        try {
-            
-            
-            BufferedReader questionReader = new BufferedReader(new FileReader(questionFile));
-            
-            Object[] questionImportList = questionReader.lines().toArray();
-            
-            questionReader.close();
-            
-            for(Object question: questionImportList){
-                
-                String questionString = question.toString().trim();
-                String[] questionArray = questionString.split(",");
-                
-                ArrayList<String> options = new ArrayList<>();
-                
-                options.add(questionArray[1]);
-                options.add(questionArray[2]);
-                options.add(questionArray[3]);
-                options.add(questionArray[4]);
-                
-                questionList.add(new Question(questionArray[0], options, Integer.parseInt(questionArray[5].trim())));
-                
-            }
-            
-            
-            
-            
-        } catch (FileNotFoundException ex) {
-            
-            Logger.getLogger(QuizInterface.class.getName()).log(Level.SEVERE, null, ex);
-            
-        } catch (IOException ex) {
-            Logger.getLogger(QuizInterface.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
-    }
 
-    public void fillComboBox(){
-        
-        String[] modelInput = new String[questionList.size()];
-        
-        for(int i=0; i< questionList.size(); i++){
-            modelInput[i] = Integer.toString(i+1);
-        }
-        
-        questionPicker.setModel(new javax.swing.DefaultComboBoxModel<>(modelInput));
-        
-    }
-    
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
