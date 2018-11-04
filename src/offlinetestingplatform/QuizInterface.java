@@ -270,6 +270,7 @@ public class QuizInterface extends javax.swing.JFrame {
     
     public void fillQuestionsFromCSV(){
         
+        //UPDATE FILE PATH TO RUN PROJECT
         String questionFilePath = "/home/aayushjoglekar/NetBeansProjects/OfflineTestingPlatform/src/data/questionStore.csv";
         
         File questionFile = new File(questionFilePath);
