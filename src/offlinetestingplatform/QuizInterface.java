@@ -16,19 +16,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Enumeration;
-import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Vector;
 
 public class quizInterface extends javax.swing.JFrame {
     
-    private Vector<question> questionList;
+    private Vector<question> questions;
 
     public void displaySelectedQuestion(int selectedQuestionIndex){
 
         buttonGroup1.clearSelection();
 
-        Question requiredQuestion = questionList.get(selectedQuestionIndex-1)
+        question requiredQuestion = questions.get(selectedQuestionIndex-1);
 
         questionDisplay.setText(requiredQuestion.getContent());
 
@@ -81,7 +81,7 @@ public class quizInterface extends javax.swing.JFrame {
                 options.add(questionArray[3]);
                 options.add(questionArray[4]);
 
-                questionList.add(new question(questionArray[0], options, Integer.parseInt(questionArray[5].trim())));
+                questions.add(new question(questionArray[0], options, Integer.parseInt(questionArray[5].trim())));
 
             }
 
@@ -102,9 +102,9 @@ public class quizInterface extends javax.swing.JFrame {
 
     public void fillComboBox(){
 
-        String[] modelInput = new String[questionList.size()];
+        String[] modelInput = new String[questions.size()];
 
-        for(int i=0; i< questionList.size(); i++){
+        for(int i=0; i< questions.size(); i++){
             modelInput[i] = Integer.toString(i+1);
         }
 
@@ -117,7 +117,7 @@ public class quizInterface extends javax.swing.JFrame {
      */
     public quizInterface() {
         initComponents();
-        questionList = new ArrayList<>();
+        questions = new Vector<>();
         fillQuestionsFromCSV();
         fillComboBox();
         displaySelectedQuestion(1);
