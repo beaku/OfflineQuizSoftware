@@ -115,13 +115,17 @@ public class quizInterface extends javax.swing.JFrame {
     /**
      * Creates new form quizInterface
      */
-    public quizInterface() {
+    public quizInterface(Vector<question> questionsSentIn) {
         initComponents();
-        questions = new Vector<>();
-        fillQuestionsFromCSV();
+//        questions = new Vector<>();
+//        fillQuestionsFromCSV();
+
+        questions = questionsSentIn;
+
         fillComboBox();
         displaySelectedQuestion(1);
-        
+
+
         questionPicker.addItemListener(new ItemListener(){
 
             @Override
