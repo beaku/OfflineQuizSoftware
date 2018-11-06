@@ -7,28 +7,21 @@ package offlinetestingplatform;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Vector;
 
-public class QuizInterface extends javax.swing.JFrame {
+public class quizInterface extends javax.swing.JFrame {
 
-    private Vector<Question> questionList;
+    private Vector<question> questions;
 
     public void displaySelectedQuestion(int selectedQuestionIndex){
 
         buttonGroup1.clearSelection();
 
-        Question requiredQuestion = questionList.get(selectedQuestionIndex-1);
+        question requiredQuestion = questions.get(selectedQuestionIndex-1);
 
         questionDisplay.setText(requiredQuestion.getContent());
 
@@ -53,58 +46,11 @@ public class QuizInterface extends javax.swing.JFrame {
 
     }
 
-    public void fillQuestionsFromCSV(){
-
-        //UPDATE FILE PATH TO RUN PROJECT
-        String questionFilePath = "/home/aayushjoglekar/NetBeansProjects/OfflineTestingPlatform/src/data/questionStore.csv";
-
-        File questionFile = new File(questionFilePath);
-
-        try {
-
-
-            BufferedReader questionReader = new BufferedReader(new FileReader(questionFile));
-
-            Object[] questionImportList = questionReader.lines().toArray();
-
-            questionReader.close();
-
-            for(Object question: questionImportList){
-
-                String questionString = question.toString().trim();
-                String[] questionArray = questionString.split(",");
-
-                ArrayList<String> options = new ArrayList<>();
-
-                options.add(questionArray[1]);
-                options.add(questionArray[2]);
-                options.add(questionArray[3]);
-                options.add(questionArray[4]);
-
-                questionList.add(new Question(questionArray[0], options, Integer.parseInt(questionArray[5].trim())));
-
-            }
-
-
-
-
-        } catch (FileNotFoundException ex) {
-
-            Logger.getLogger(QuizInterface.class.getName()).log(Level.SEVERE, null, ex);
-
-        } catch (IOException ex) {
-            Logger.getLogger(QuizInterface.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
-
-    }
-
     public void fillComboBox(){
 
-        String[] modelInput = new String[questionList.size()];
+        String[] modelInput = new String[questions.size()];
 
-        for(int i=0; i< questionList.size(); i++){
+        for(int i=0; i< questions.size(); i++){
             modelInput[i] = Integer.toString(i+1);
         }
 
@@ -113,15 +59,19 @@ public class QuizInterface extends javax.swing.JFrame {
     }
 
     /**
-     * Creates new form QuizInterface
+     * Creates new form quizInterface
      */
-    public QuizInterface() {
+    public quizInterface(Vector<question> questionsSentIn) {
         initComponents();
-        questionList = new ArrayList<>();
-        fillQuestionsFromCSV();
+//        questions = new Vector<>();
+//        fillQuestionsFromCSV();
+
+        questions = questionsSentIn;
+
         fillComboBox();
         displaySelectedQuestion(1);
-        
+
+
         questionPicker.addItemListener(new ItemListener(){
 
             @Override
@@ -135,10 +85,11 @@ public class QuizInterface extends javax.swing.JFrame {
                     displaySelectedQuestion(optionSelected);
                 }
             }
-        
-        
+
+            
         });
-        
+
+        java.awt.EventQueue.invokeLater(() -> this.setVisible(true));
     }
 
     /**
@@ -289,36 +240,6 @@ public class QuizInterface extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuizInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuizInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuizInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QuizInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new QuizInterface().setVisible(true);
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;

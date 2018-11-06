@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-public class Question {
+public class question {
 
     private String content;
     private Dictionary options;
@@ -14,7 +14,7 @@ public class Question {
     private boolean isCorrect;
     private int marks;
 
-    public Question(String _content, ArrayList<String> _options, int _correct){
+    public question(String _content, ArrayList<String> _options, int _correct){
 
         content = _content;
         options = new Hashtable();

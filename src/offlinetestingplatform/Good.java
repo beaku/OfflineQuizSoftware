@@ -1,4 +1,4 @@
-package offlinetestingplatform;
-
-public class Good extends Question {
-}
+//package offlinetestingplatform;
+//
+//public class Good extends question {
+//}
