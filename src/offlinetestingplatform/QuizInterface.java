@@ -76,10 +76,7 @@ public class quizInterface extends javax.swing.JFrame {
 
                 ArrayList<String> options = new ArrayList<>();
 
-                options.add(questionArray[1]);
-                options.add(questionArray[2]);
-                options.add(questionArray[3]);
-                options.add(questionArray[4]);
+                options.addAll(Arrays.asList(Arrays.copyOfRange(questionArray, 1, 5)));
 
                 questions.add(new question(questionArray[0], options, Integer.parseInt(questionArray[5].trim())));
 
