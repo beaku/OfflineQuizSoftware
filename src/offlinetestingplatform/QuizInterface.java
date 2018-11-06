@@ -20,15 +20,15 @@ import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class QuizInterface extends javax.swing.JFrame {
-
-    private Vector<Question> questionList;
+public class quizInterface extends javax.swing.JFrame {
+    
+    private Vector<question> questionList;
 
     public void displaySelectedQuestion(int selectedQuestionIndex){
 
         buttonGroup1.clearSelection();
 
-        Question requiredQuestion = questionList.get(selectedQuestionIndex-1);
+        Question requiredQuestion = questionList.get(selectedQuestionIndex-1)
 
         questionDisplay.setText(requiredQuestion.getContent());
 
@@ -81,7 +81,7 @@ public class QuizInterface extends javax.swing.JFrame {
                 options.add(questionArray[3]);
                 options.add(questionArray[4]);
 
-                questionList.add(new Question(questionArray[0], options, Integer.parseInt(questionArray[5].trim())));
+                questionList.add(new question(questionArray[0], options, Integer.parseInt(questionArray[5].trim())));
 
             }
 
@@ -90,10 +90,10 @@ public class QuizInterface extends javax.swing.JFrame {
 
         } catch (FileNotFoundException ex) {
 
-            Logger.getLogger(QuizInterface.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(quizInterface.class.getName()).log(Level.SEVERE, null, ex);
 
         } catch (IOException ex) {
-            Logger.getLogger(QuizInterface.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(quizInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
@@ -113,9 +113,9 @@ public class QuizInterface extends javax.swing.JFrame {
     }
 
     /**
-     * Creates new form QuizInterface
+     * Creates new form quizInterface
      */
-    public QuizInterface() {
+    public quizInterface() {
         initComponents();
         questionList = new ArrayList<>();
         fillQuestionsFromCSV();
@@ -135,10 +135,10 @@ public class QuizInterface extends javax.swing.JFrame {
                     displaySelectedQuestion(optionSelected);
                 }
             }
-        
-        
+
+
         });
-        
+
     }
 
     /**
@@ -304,19 +304,19 @@ public class QuizInterface extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuizInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(quizInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuizInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(quizInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuizInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(quizInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QuizInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(quizInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new QuizInterface().setVisible(true);
+            new quizInterface().setVisible(true);
         });
     }
 

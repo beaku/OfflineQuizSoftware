@@ -2,6 +2,6 @@ package offlinetestingplatform;
 
 import java.util.Vector;
 
-public class Quiz {
-    private Vector<Question> Questions = new Vector<>();
+public class quiz {
+    private Vector<question> questions = new Vector<>();
 }
