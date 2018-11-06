@@ -1,2 +1,4 @@
-public class Tough extends Question {
-}
+//package offlinetestingplatform;
+//
+// public class Tough extends question {
+//}
