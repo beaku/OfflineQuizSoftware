@@ -4,4 +4,8 @@ import java.util.Vector;
 
 public class quiz {
     private Vector<question> questions = new Vector<>();
+
+    public static void main(String[] args) {
+        quizInterface quizInterface = new quizInterface();
+    }
 }
