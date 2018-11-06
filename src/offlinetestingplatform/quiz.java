@@ -34,7 +34,7 @@ public class quiz {
     public void fillQuestionsFromCSV(){
 
         //UPDATE FILE PATH TO RUN PROJECT
-        String questionFilePath = "C:\\Users\\DELL\\Desktop\\work\\OOM\\miniproject\\OfflineQuizSoftware\\src\\data\\questionStore.csv";
+        String questionFilePath = ".\\src\\data\\questionStore.csv";
 
         File questionFile = new File(questionFilePath);
 
