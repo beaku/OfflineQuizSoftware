@@ -7,17 +7,10 @@ package offlinetestingplatform;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Enumeration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.Vector;
 
 public class quizInterface extends javax.swing.JFrame {
@@ -50,50 +43,6 @@ public class quizInterface extends javax.swing.JFrame {
         option4.setText(options.get(3));
 
         submit.setEnabled(!requiredQuestion.isAttempted());
-
-    }
-
-    public void fillQuestionsFromCSV(){
-
-        //UPDATE FILE PATH TO RUN PROJECT
-        String questionFilePath = "C:\\Users\\DELL\\Desktop\\work\\OOM\\miniproject\\OfflineQuizSoftware\\src\\data\\questionStore.csv";
-
-        File questionFile = new File(questionFilePath);
-
-        try {
-
-
-            BufferedReader questionReader = new BufferedReader(new FileReader(questionFile));
-
-            Object[] questionImportList = questionReader.lines().toArray();
-
-            questionReader.close();
-
-            for(Object question: questionImportList){
-
-                String questionString = question.toString().trim();
-                String[] questionArray = questionString.split(",");
-
-                ArrayList<String> options = new ArrayList<>();
-
-                options.addAll(Arrays.asList(Arrays.copyOfRange(questionArray, 1, 5)));
-
-                questions.add(new question(questionArray[0], options, Integer.parseInt(questionArray[5].trim())));
-
-            }
-
-
-
-
-        } catch (FileNotFoundException ex) {
-
-            Logger.getLogger(quizInterface.class.getName()).log(Level.SEVERE, null, ex);
-
-        } catch (IOException ex) {
-            Logger.getLogger(quizInterface.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
 
     }
 
