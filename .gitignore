@@ -10,3 +10,9 @@ offlineQuizSoftware.uml
 stash/src/offlinetestingplatform/Good.java
 stash/src/offlinetestingplatform/Question.java
 stash/src/offlinetestingplatform/complex.java
+build.xml
+build/
+dist/
+manifest.mf
+nbproject/
+
